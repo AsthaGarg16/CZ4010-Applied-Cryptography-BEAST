@@ -44,10 +44,10 @@ class Website:
             print('\n\n')
         # Close socket
         client_socket.close()
-        self.server_socket.close()
+        self.serverSocket.close()
 
 if __name__ == '__main__':
-  Website().run()
+  Website().start()
 
 
       

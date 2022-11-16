@@ -8,7 +8,7 @@ BLOCK_SIZE = AES.block_size
 ALPHANUMERIC = string.digits + string.ascii_letters
 
 class CryptoUtils:
-    AES_KEY = b''
+    AES_KEY = b'Uh280ch5295ycGDW'
 
     @staticmethod
     def generate_cookie(length):
@@ -43,7 +43,7 @@ class CryptoUtils:
     def encrypt(msg, IV=None):
         if not IV:
             IV = Random.new().read(BLOCK_SIZE)
-            cipher = AES.new(CryptoUtils.AES_KEY, AES.MODE_CBC, IV)
+        cipher = AES.new(CryptoUtils.AES_KEY, AES.MODE_CBC, IV)
         if isinstance(CryptoUtils.pad(msg), str):
             return IV + cipher.encrypt(str.encode(CryptoUtils.pad(msg)))
         else:
