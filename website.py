@@ -4,9 +4,6 @@ from cryptography import ALPHANUMERIC
 
 class Website:
     def __init__(self) :
-        """
-        Constructor with sockets
-        """
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         server_socket.bind((socket.gethostname(), 4876))
@@ -14,10 +11,6 @@ class Website:
         self.serverSocket = server_socket
 
     def start(self):
-        """
-        Main
-        """
-
         client_socket, address = self.serverSocket.accept()
         for i in range(8):
             # Receive request
@@ -32,10 +25,7 @@ class Website:
 
             for j in ALPHANUMERIC:
 
-                # Receive request
                 request_encrypted = client_socket.recv(112)
-
-                # Decrypt request
                 request_decrypted = CryptoUtils.decrypt(request_encrypted)
 
                 # Printing Invalid requests

@@ -5,9 +5,6 @@ from cryptography import ALPHANUMERIC
 
 class Victim:
     def __init__(self):
-        """
-            Constructor with sockets and parts of the request
-        """
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.connect((socket.gethostname(), 4875))
@@ -18,11 +15,10 @@ class Victim:
         print('I am the victim. My Cookie is', self.cookie, "\n")
 
     def request(self, step):
-        """
-        Construct the plain text after modifying it
+        
 
-        step: no of bytes to be shifted to guess the next letter
-        """
+        #step: no of bytes to be shifted to guess the next letter
+       
         if step == 0:
             s = self.byte_shifting_part
         else:
@@ -30,16 +26,13 @@ class Victim:
         return s + self.request_part + self.cookie
 
     def modify(self, string, char, iv, prev_cipher):
-        """
-        Function to modify the plaintext of the request
-        to the XOR of the 3 blocks
 
-        char: the character to which the last letter is changed to
-        iv: the previous cipher in the report
-        prev_cipher: the iv for plaintext in the report
-        string: the plaintext request after shifting the bytes 
-            but before modifying the 1st block
-        """
+        #char: the character to which the last letter is changed to
+        #iv: the previous cipher in the report
+        #prev_cipher: the iv for plaintext in the report
+        #string: the plaintext request after shifting the bytes 
+         #   but before modifying the 1st block
+       
         bs = BLOCK_SIZE
         # Change the last character
         guess = string[4*bs:5*bs][:-1] + char
@@ -49,9 +42,6 @@ class Victim:
         return b1 + string[bs:].encode()
 
     def block_print(self, string, pr=True):
-        """
-        Function to print the malicious requests in formatted blocks
-        """
         string = CryptoUtils.pad(string)
         l = [string[i:i+BLOCK_SIZE] for i in range(0, len(string), BLOCK_SIZE)]
         l = [repr(s)[2:-1] if isinstance(s, bytes) else repr(s)[1:-1] for s in l]
@@ -61,9 +51,6 @@ class Victim:
 
 
     def start(self):
-        """
-        Main running loop of the Victim
-        """
         iv = None
         print('The primary request is', repr(self.request(0))[1:-1], end="\n\n")
         for i in range(8):
