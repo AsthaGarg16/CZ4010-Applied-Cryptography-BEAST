@@ -30,8 +30,7 @@ class Victim:
         #char: the character to which the last letter is changed to
         #iv: the previous cipher in the report
         #prev_cipher: the iv for plaintext in the report
-        #string: the plaintext request after shifting the bytes 
-         #   but before modifying the 1st block
+        #string: the plaintext request after shifting the bytes but before modifying the 1st block
        
         bs = BLOCK_SIZE
         # Change the last character
