@@ -31,14 +31,13 @@ class Victim:
         #iv: the previous cipher in the report
         #prev_cipher: the iv for plaintext in the report
         #string: the plaintext request after shifting the bytes but before modifying the 1st block
-       
-        bs = BLOCK_SIZE
+        
         # Change the last character
-        guess = string[4*bs:5*bs][:-1] + char
+        guess = string[4*BLOCK_SIZE:5*BLOCK_SIZE][:-1] + char
         print('The guess is ', repr(guess))
         # Taking the xor of the 3 blocks
         b1 = CryptoUtils.xor_block(guess.encode(), iv, prev_cipher)
-        return b1 + string[bs:].encode()
+        return b1 + string[BLOCK_SIZE:].encode()
 
     def block_print(self, string, pr=True):
         string = CryptoUtils.pad(string)
